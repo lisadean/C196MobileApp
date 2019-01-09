@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddTerm">
+
+    <DatePicker
+        android:id="@+id/term_add_date_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/term_add_ok_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:text="@android:string/ok"
+        android:visibility="invisible" />
+
+    <RelativeLayout
+        android:id="@+id/term_add_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/titleEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:ems="10"
+            android:textSize="@dimen/larger_text"
+            android:inputType="text"
+            android:hint="@string/enter_term_title" />
+        <Button
+            android:id="@+id/term_start_date_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleEdit"
+            android:onClick="setDate"
+            android:text="@string/start_date"
+            android:textSize="@dimen/normal_text"/>
+        <TextView
+            android:id="@+id/term_start_date_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/term_start_date_button"
+            android:layout_alignBottom="@id/term_start_date_button"
+            android:textSize="@dimen/normal_text"
+            android:text="Start date displays here"
+            />
+        <Button
+            android:id="@+id/term_end_date_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/term_start_date_button"
+            android:onClick="setDate"
+            android:text="@string/end_date"
+            android:textSize="@dimen/normal_text"/>
+        <TextView
+            android:id="@+id/term_end_date_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/term_end_date_button"
+            android:layout_toRightOf="@id/term_end_date_button"
+            android:textSize="@dimen/normal_text"
+            android:text="End date displays here"
+            />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/term_save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="@dimen/default_margin"
+            android:onClick="saveTerm"
+            android:src="@drawable/ic_action_save" />
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/term_cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/term_save_button"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/default_margin"
+            android:onClick="cancel"
+            android:src="@drawable/ic_action_cancel" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -4,9 +4,10 @@
     android:layout_height="match_parent">
 
     <ListView
+        android:id="@+id/generic_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/add_button"/>
+        android:layout_above="@id/add_button" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_button"
@@ -15,6 +16,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:onClick="add"
+        android:src="@drawable/ic_action_add"
         />
 
 </RelativeLayout>

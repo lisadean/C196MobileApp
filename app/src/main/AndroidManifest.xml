@@ -16,8 +16,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TermList" />
-        <activity android:name=".AddTerm"></activity>
+        <activity
+            android:name=".TermList"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.lisadean.c196lisadean.MainActivity" />
+        </activity>
+        <activity
+            android:name=".AddTerm"
+            android:parentActivityName=".TermList">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.lisadean.c196lisadean.TermList" />
+        </activity>
+        <provider
+            android:name="net.lisadean.c196lisadean.TermsProvider"
+            android:authorities="net.lisadean.c196lisadean.termsprovider"
+            android:exported="false"
+            />
     </application>
 
 </manifest>
