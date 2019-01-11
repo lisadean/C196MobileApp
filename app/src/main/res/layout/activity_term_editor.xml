@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddTerm">
+    tools:context=".TermEditor">
 
     <DatePicker
         android:id="@+id/term_add_date_picker"
@@ -74,6 +74,29 @@
             android:text="End date displays here"
             />
 
+        <Button
+            android:id="@+id/term_course_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/term_end_date_button"
+            android:textSize="@dimen/normal_text"
+            android:text="Courses"
+            android:layout_marginTop="@dimen/extra_margin"
+            android:onClick="edit_courses"
+            />
+
+        <Button
+            android:id="@+id/term_delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:onClick="delete"
+            android:text="Delete term"
+            android:textSize="@dimen/normal_text"
+            android:visibility="invisible"
+            />
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/term_save_button"
             android:layout_width="wrap_content"
@@ -83,7 +106,7 @@
             android:layout_alignParentRight="true"
             android:layout_gravity="end|bottom"
             android:layout_margin="@dimen/default_margin"
-            android:onClick="saveTerm"
+            android:onClick="save"
             android:src="@drawable/ic_action_save" />
 
 

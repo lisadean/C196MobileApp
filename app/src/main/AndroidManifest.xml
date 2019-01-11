@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,23 +19,35 @@
         </activity>
         <activity
             android:name=".TermList"
+            android:label="Term List"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="net.lisadean.c196lisadean.MainActivity" />
         </activity>
         <activity
-            android:name=".AddTerm"
-            android:parentActivityName=".TermList">
+            android:name=".TermEditor"
+            android:label="Add / Edit Term">
+        </activity>
+        <activity
+            android:name=".CourseList"
+            android:label="Course List"
+            android:parentActivityName=".TermEditor">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="net.lisadean.c196lisadean.TermList" />
+                android:value="net.lisadean.c196lisadean.TermEditor" />
         </activity>
+
         <provider
             android:name="net.lisadean.c196lisadean.TermsProvider"
             android:authorities="net.lisadean.c196lisadean.termsprovider"
-            android:exported="false"
-            />
+            android:exported="false" />
+        <provider
+            android:name="net.lisadean.c196lisadean.CoursesProvider"
+            android:authorities="net.lisadean.c196lisadean.coursesprovider"
+            android:exported="false"/>
+
+
     </application>
 
 </manifest>
