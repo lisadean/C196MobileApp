@@ -102,34 +102,34 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(TERM_ID, -1);
         values.put(TERM_TITLE, "Term 1");
         values.put(TERM_START_DATE, "January 11, 2018");
-        values.put(TERM_END_DATE, "2018-11-30");
+        values.put(TERM_END_DATE, "October 31, 2018");
         db.insert(TERM_TABLE, null, values);
         values.clear();
         values.put(TERM_ID, -2);
         values.put(TERM_TITLE, "Term 2");
-        values.put(TERM_START_DATE, "2018-11-01");
-        values.put(TERM_END_DATE, "2018-11-31");
+        values.put(TERM_START_DATE, "November 01, 2018");
+        values.put(TERM_END_DATE, "November 31, 2018");
         db.insert(TERM_TABLE, null, values);
 
         this.getWritableDatabase().execSQL("INSERT INTO courses " +
                 "(_id, termid, title, start_date, end_date, status, mentor_name, mentor_phone, mentor_email, note, course_alarm) " +
-                "VALUES (-1, -1, 'Course 101', '2018-01-01', '2018-02-28', 'Complete', 'Joe Smith', 'jsmith@email.com', '123-456-7890', 'Stuff and things', 0)");
+                "VALUES (-1, -1, 'Course 101', 'January 01, 2018', 'February 28, 2018', 'Complete', 'Joe Smith', 'jsmith@email.com', '123-456-7890', 'Stuff and things', 0)");
         this.getWritableDatabase().execSQL("INSERT INTO courses " +
                 "(_id, termid, title, start_date, end_date, status, mentor_name, mentor_phone, mentor_email, note, course_alarm) " +
-                "VALUES (-2, -1, 'Course 102', '2018-03-01', '2018-04-30', 'In progress', 'Joe Smith', 'jsmith@email.com', '123-456-7890', 'Stuff and things', 0)");
+                "VALUES (-2, -1, 'Course 102', 'March 01, 2018', 'April 30, 2018', 'In progress', 'Joe Smith', 'jsmith@email.com', '123-456-7890', 'Stuff and things', 0)");
         this.getWritableDatabase().execSQL("INSERT INTO courses " +
                 "(_id, termid, title, start_date, end_date, status, mentor_name, mentor_phone, mentor_email, note, course_alarm) " +
-                "VALUES (-3, -2, 'Course 103', '2018-05-01', '2018-07-31', 'Not started', 'Jane Doe', 'jdoe@email.com', '123-456-7890', '', 0)");
+                "VALUES (-3, -2, 'Course 103', 'May 01, 2018', 'July 31, 2018', 'Not started', 'Jane Doe', 'jdoe@email.com', '123-456-7890', '', 0)");
 
         this.getWritableDatabase().execSQL("INSERT INTO assessments " +
                 "(_id, courseid, name, type, date, note) " +
-                "VALUES (-1, -2, 'Test', 'OA (Objective Assessment)', '2018-04-20', 'More stuff and things')");
+                "VALUES (-1, -2, 'Test', 'OA (Objective Assessment)', 'April 20, 2018', 'More stuff and things')");
         this.getWritableDatabase().execSQL("INSERT INTO assessments " +
                 "(_id, courseid, name, type, date, note) " +
-                "VALUES (-2, -3, 'Project', 'PA (Performance Assessment', '2018-07-15', 'More notes')");
+                "VALUES (-2, -3, 'Project', 'PA (Performance Assessment', 'July 15, 2018', 'More notes')");
         this.getWritableDatabase().execSQL("INSERT INTO assessments " +
                 "(_id, courseid, name, type, date, note) " +
-                "VALUES (-3, -1, 'Test', 'OA (Objective Assessment)', '2018-07-15', 'Notes and notes')");
+                "VALUES (-3, -1, 'Test', 'OA (Objective Assessment)', 'July 15, 2018', 'Notes and notes')");
 
     }
 
