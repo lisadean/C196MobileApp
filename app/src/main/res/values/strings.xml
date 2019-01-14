@@ -3,4 +3,16 @@
     <string name="start_date">Start Date</string>
     <string name="enter_term_title">Enter term title</string>
     <string name="end_date">End Date</string>
+    <string name="enter_course_title">Enter course title</string>
+    <string name="enter_mentor_phone">Enter mentor phone</string>
+    <string name="enter_mentor_name">Enter mentor name</string>
+    <string name="enter_mentor_email">Enter mentor email</string>
+    <string name="enter_note">Enter note</string>
+    <string name="enter_assessment_name">Enter assessment name</string>
+    <string name="delete_course">Delete course</string>
+    <string name="assessments">Assessments</string>
+    <string name="set_alarms">Set alarms</string>
+    <string name="end_date_displays_here">End date displays here</string>
+    <string name="start_date_displays_here">Start date displays here</string>
+    <string name="status">Status</string>
 </resources>

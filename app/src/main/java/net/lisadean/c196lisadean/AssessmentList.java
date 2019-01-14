@@ -8,39 +8,37 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-public class CourseList extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class AssessmentList extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private CursorAdapter ca;
     private Uri uri;
-    private Cursor cursor;
-    private String termID;
+    private String courseID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_list);
+        setContentView(R.layout.activity_assessment_list);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         populateData();
     }
 
     private void populateData() {
         Intent intent = getIntent();
-        uri = intent.getParcelableExtra(CoursesProvider.CONTENT_ITEM_TYPE);
-        termID = uri.getLastPathSegment();
+        uri = intent.getParcelableExtra(AssessmentsProvider.CONTENT_ITEM_TYPE);
+        courseID = uri.getLastPathSegment();
 
-        String filter = DBHelper.TERM_ID + "=" + termID;
-        cursor = getContentResolver().query(uri, DBHelper.TERM_COLUMNS, filter, null, null);
+        String filter = DBHelper.COURSE_ID + "=" + courseID;
+        Cursor cursor = getContentResolver().query(uri, DBHelper.COURSE_COLUMNS, filter, null, null);
         cursor.moveToFirst();
-        setTitle(cursor.getString(cursor.getColumnIndex(DBHelper.TERM_TITLE)));
+        setTitle(cursor.getString(cursor.getColumnIndex(DBHelper.COURSE_TITLE)));
         cursor.close();
 
-        String[] columns = {DBHelper.TERM_TITLE};
+        String[] columns = {DBHelper.ASSESSMENT_NAME};
         int[] id = {android.R.id.text1};
         ca = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, null, columns, id,0);
         ListView list = findViewById(R.id.generic_list);
@@ -48,10 +46,10 @@ public class CourseList extends AppCompatActivity implements LoaderManager.Loade
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
-                uri = Uri.parse(CoursesProvider.CONTENT_URI + "/" + id);
-                Intent intent = new Intent(CourseList.this, CourseEditor.class);
-                intent.putExtra(CoursesProvider.CONTENT_ITEM_TYPE, uri);
-                intent.putExtra(DBHelper.TERM_ID, termID);
+                uri = Uri.parse(AssessmentsProvider.CONTENT_URI + "/" + id);
+                Intent intent = new Intent(AssessmentList.this, AssessmentEditor.class);
+                intent.putExtra(AssessmentsProvider.CONTENT_ITEM_TYPE, uri);
+                intent.putExtra(DBHelper.COURSE_ID, courseID);
                 startActivityForResult(intent, 0);
             }
         });
@@ -60,8 +58,9 @@ public class CourseList extends AppCompatActivity implements LoaderManager.Loade
     }
 
     public void add(View view) {
-        Intent intent = new Intent(this, CourseEditor.class);
-        intent.putExtra(DBHelper.TERM_ID, termID);
+        // Change to AssessmentEditor
+        Intent intent = new Intent(this, AssessmentEditor.class);
+        intent.putExtra(DBHelper.COURSE_ID, courseID);
         startActivity(intent);
     }
 
@@ -73,7 +72,8 @@ public class CourseList extends AppCompatActivity implements LoaderManager.Loade
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(this, CoursesProvider.CONTENT_URI, DBHelper.COURSE_COLUMNS, DBHelper.COURSE_TERMID + "=" + termID, null, null);
+        return new CursorLoader(this, AssessmentsProvider.CONTENT_URI, DBHelper.ASSESSMENT_COLUMNS,
+                DBHelper.ASSESSMENT_COURSEID + "=" + courseID, null, null);
     }
 
     @Override

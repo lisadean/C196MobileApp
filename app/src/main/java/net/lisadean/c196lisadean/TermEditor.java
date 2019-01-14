@@ -65,8 +65,6 @@ public class TermEditor extends AppCompatActivity {
         tv.setText(endDate);
 
         cursor.close();
-
-
     }
 
     private void createDatePicker() {
@@ -86,7 +84,7 @@ public class TermEditor extends AppCompatActivity {
     private void closeDatePicker() {
         Calendar date = Calendar.getInstance();
         int year = datePicker.getYear();
-        int month = datePicker.getMonth() + 1;
+        int month = datePicker.getMonth();
         int day = datePicker.getDayOfMonth();
         date.set(year, month, day);
         DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);

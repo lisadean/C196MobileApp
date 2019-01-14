@@ -37,6 +37,30 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="net.lisadean.c196lisadean.TermEditor" />
         </activity>
+        <activity
+            android:name=".CourseEditor"
+            android:label="Course Editor"
+            android:parentActivityName=".CourseList">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.lisadean.c196lisadean.CourseList" />
+        </activity>
+        <activity
+            android:name=".AssessmentList"
+            android:label="Assessment List"
+            android:parentActivityName=".CourseEditor">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.lisadean.c196lisadean.CourseEditor" />
+        </activity>
+        <activity
+            android:name=".AssessmentEditor"
+            android:label="Assessment Editor"
+            android:parentActivityName=".AssessmentList">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.lisadean.c196lisadean.AssessmentList" />
+        </activity>
 
         <provider
             android:name="net.lisadean.c196lisadean.TermsProvider"
@@ -45,6 +69,10 @@
         <provider
             android:name="net.lisadean.c196lisadean.CoursesProvider"
             android:authorities="net.lisadean.c196lisadean.coursesprovider"
+            android:exported="false"/>
+        <provider
+            android:name="net.lisadean.c196lisadean.AssessmentsProvider"
+            android:authorities="net.lisadean.c196lisadean.assessmentsprovider"
             android:exported="false"/>
 
 
