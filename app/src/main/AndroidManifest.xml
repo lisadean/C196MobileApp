@@ -75,6 +75,11 @@
             android:authorities="net.lisadean.c196lisadean.assessmentsprovider"
             android:exported="false"/>
 
+        <receiver
+            android:name="net.lisadean.c196lisadean.AlarmReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
 
     </application>
 

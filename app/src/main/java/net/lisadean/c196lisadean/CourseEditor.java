@@ -1,6 +1,9 @@
 package net.lisadean.c196lisadean;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
@@ -20,8 +23,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class CourseEditor extends AppCompatActivity {
     private DatePicker datePicker;
@@ -196,12 +202,8 @@ public class CourseEditor extends AppCompatActivity {
                 result = getContentResolver().update(uri, cv, DBHelper.COURSE_ID + "=" + courseID, null);
             }
             if (alarm == 1) {
-                AlarmReceiver ar = new AlarmReceiver("Course Start Alert!",
-                        courseTitle + " is scheduled to start today");
-                ar.createAlarm(this, startDate);
-                AlarmReceiver ar1 = new AlarmReceiver("Course End Alert!",
-                        courseTitle + " is scheduled to end today");
-                ar1.createAlarm(this, endDate);
+                createAlarm("Course Start Alert!", courseTitle + " is scheduled to start today", startDate);
+                createAlarm("Course End Alert!", courseTitle + " is scheduled to end today", endDate);
             }
             Toast.makeText(getApplicationContext(), "Course added or updated", Toast.LENGTH_SHORT).show();
         } else {
@@ -250,7 +252,6 @@ public class CourseEditor extends AppCompatActivity {
         if (saveTerm() > 0) {
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("message/rfc822");
-//        intent.putExtra(Intent.EXTRA_EMAIL  , new String[]{"recipient@example.com"});
             intent.putExtra(Intent.EXTRA_SUBJECT, courseTitle + " Notes");
             intent.putExtra(Intent.EXTRA_TEXT   , courseNote);
             try {
@@ -258,6 +259,31 @@ public class CourseEditor extends AppCompatActivity {
             } catch (android.content.ActivityNotFoundException ex) {
                 Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    public void createAlarm(String title, String message, String date) {
+        try {
+            Date alarmDate = new SimpleDateFormat("MMMM dd, yyyy").parse(date);
+            Calendar c = Calendar.getInstance();
+            c.setTime(alarmDate);
+            Long alarmMillis = c.getTimeInMillis();
+            String datePart = new SimpleDateFormat("MMMM dd, yyyy").format(alarmDate);
+            String timePart = new SimpleDateFormat("H:mm:ss").format(alarmDate);
+
+            Log.d("LOG AlarmReceiver", "current millis: " + System.currentTimeMillis());
+            Log.d("LOG AlarmReceiver", "date: " + datePart + " time: " + timePart + " millis: " + alarmMillis);
+
+            Intent intent = new Intent(this, AlarmReceiver.class);
+            intent.putExtra("title", title);
+            intent.putExtra("message", message);
+            PendingIntent alarmIntent = PendingIntent.getBroadcast(this, AlarmReceiver.notificationID, intent, 0);
+
+            AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+            am.set(AlarmManager.RTC_WAKEUP, alarmMillis, alarmIntent);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            Log.d("LOG AlarmReceiver", e.getMessage());
         }
     }
 }
